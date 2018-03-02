@@ -50,18 +50,20 @@
                 var divT=document.getElementById("head");
                 divT.innerHTML= now+" "+"第"+result+"周";
 
-                if(today==5)
-                {
-                    day2=1;
-                }
+                //周末的情况
                 if(today==6 || today==7)
                 {
                     today=1;
                     day2=2;
                 }
+                else if(today == 5)
+                {
+                    day2=today;
+                }
+                //显示星期几
                 document.getElementById("xingqi"+today).style.display="table-cell";
                 document.getElementById("xingqi"+day2).style.display="table-cell";
-
+                //显示表格内容
                 var i=1;
                 for (i;i<6;i++)
                 {
@@ -69,6 +71,34 @@
                     var tempid2 = day2.toString()+i.toString();
                     document.getElementById(tempid).style.display="table-cell";
                     document.getElementById(tempid2).style.display="table-cell";
+                }
+
+                //课表单双周判断填充
+                var class1time = "52";
+                var class1name = "分析化学实训";
+                var class1room = "实验楼1202";
+                var class1bj = "中专中药16-1";
+                var class1week = 1;
+                var class1start = "2";
+                var class1end= "16";
+
+                var class2time = "52";
+                var class2name = "分析化学实训";
+                var class2room = "实验楼1202";
+                var class2bj = "中专中药16-2";
+                var class2week = 2;
+                var class2start = "2";
+                var class2end= "16";
+
+                if(result%2 == 0)
+                {
+                    var classfin =  document.getElementById(class2time);
+                    classfin.innerHTML = class2name + "<br>" +class2room + "<br>"+class2bj + "<br>"+class2start+"-"+class2end+"周";
+                }
+                else
+                {
+                    var classfin =  document.getElementById(class1time);
+                    classfin.innerHTML = class1name + "<br>" +class1room + "<br>"+class1bj + "<br>"+class1start+"-"+class1end+"周";
                 }
             }
             function add_zero(temp)
