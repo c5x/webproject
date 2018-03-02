@@ -1,0 +1,188 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="manifest" href="site.webmanifest">
+        <link rel="apple-touch-icon" href="icon.png">
+        <!-- Place favicon.ico in the root directory -->
+
+        <link rel="stylesheet" href="css/normalize.css">
+        <link rel="stylesheet" href="css/main.css">
+    </head>
+    <body>
+        <!--[if lte IE 9]>
+            <p class="browserupgrade">你正在使用一个 <strong>过时</strong> 的浏览器， 拜托你换个新一点的。</p>
+        <![endif]-->
+
+        <!-- Add your site or application content here -->
+        <!-- js -->
+        <script language="javascript">
+            function getCurDate()
+            {
+                var d = new Date();
+                var today = d.getDay();
+                var day2 = d.getDay()+1;
+                var year = d.getFullYear();
+                var month = add_zero(d.getMonth()+1);
+                var day = add_zero(d.getDate());
+                var hours = add_zero(d.getHours());
+                var minutes = add_zero(d.getMinutes());
+                var seconds=add_zero(d.getSeconds());
+                var now = year+"年"+month+"月"+day+"日";
+
+                //本周是第几周
+                var firstDay = new Date(year,0, 1);
+                var dayOfWeek = firstDay.getDay();
+                var spendDay= 1;
+                if (dayOfWeek !=0) {
+                    spendDay=7-dayOfWeek+1;
+                }
+                firstDay = new Date(year,0, 1+spendDay);
+                var dw =Math.ceil((d.valueOf()- firstDay.valueOf())/ 86400000);
+                var result =Math.ceil(dw/7)+1-9;
+                //本周是第几周
+
+                var divT=document.getElementById("head");
+                divT.innerHTML= now+" "+"第"+result+"周";
+
+                //周末的情况
+                if(today==6 || today==7)
+                {
+                    today=1;
+                    day2=2;
+                }
+                else if(today == 5)
+                {
+                    day2=today;
+                }
+                //显示星期几
+                document.getElementById("xingqi"+today).style.display="table-cell";
+                document.getElementById("xingqi"+day2).style.display="table-cell";
+                //显示表格内容
+                var i=1;
+                for (i;i<6;i++)
+                {
+                    var tempid = today.toString()+i.toString();
+                    var tempid2 = day2.toString()+i.toString();
+                    document.getElementById(tempid).style.display="table-cell";
+                    document.getElementById(tempid2).style.display="table-cell";
+                }
+
+                //课表单双周判断填充
+                var class1time = "52";
+                var class1name = "分析化学实训";
+                var class1room = "实验楼1202";
+                var class1bj = "中专中药16-1";
+                var class1week = 1;
+                var class1start = "2";
+                var class1end= "16";
+
+                var class2time = "52";
+                var class2name = "分析化学实训";
+                var class2room = "实验楼1202";
+                var class2bj = "中专中药16-2";
+                var class2week = 2;
+                var class2start = "2";
+                var class2end= "16";
+
+                if(result%2 == 0)
+                {
+                    var classfin =  document.getElementById(class2time);
+                    classfin.innerHTML = class2name + "<br>" +class2room + "<br>"+class2bj + "<br>"+class2start+"-"+class2end+"周";
+                }
+                else
+                {
+                    var classfin =  document.getElementById(class1time);
+                    classfin.innerHTML = class1name + "<br>" +class1room + "<br>"+class1bj + "<br>"+class1start+"-"+class1end+"周";
+                }
+            }
+            function add_zero(temp)
+            {
+                if(temp<10) return "0"+temp;
+                else return temp;
+            }
+            setInterval("getCurDate()",100);
+
+
+        </script>
+        <!-- js -->
+
+        <div style="height: 100%;">
+            <div id="head" align="center">
+            </div>
+            <div style="align: center;">
+                <table style="width: 100%;">
+                    <tr style="background-color: lightgray">
+                        <td align="center">上课时间</td>
+                        <td style="display: none; text-align: center;" id="xingqi1">星期一</td>
+                        <td style="display: none; text-align: center;" id="xingqi2">星期二</td>
+                        <td style="display: none; text-align: center;" id="xingqi3">星期三</td>
+                        <td style="display: none; text-align: center;" id="xingqi4">星期四</td>
+                        <td style="display: none; text-align: center;" id="xingqi5">星期五</td>
+                    </tr>
+                    <tr>
+                        <td align="center">一<br/>（8:20）</td>
+                        <td style="display: none"  align="center" id="11" ></td>
+                        <td style="display: none"  align="center" id="21" ></td>
+                        <td style="display: none"  align="center" id="31" ></td>
+                        <td style="display: none"  align="center" id="41" ></td>
+                        <td style="display: none"  align="center" id="51" ></td>
+                    </tr>
+                    <tr style="background-color: lightgray">
+                        <td align="center">二<br/>（10:20）</td>
+                        <td style="display: none"  align="center" id="12" ></td>
+                        <td style="display: none"  align="center" id="22" ></td>
+                        <td style="display: none"  align="center" id="32" ></td>
+                        <td style="display: none"  align="center" id="42" ></td>
+                        <td style="display: none"  align="center" id="52" ></td>
+                    </tr>
+                    <tr>
+                        <td align="center">三<br/>（14:30）</td>
+                        <td style="display: none"  align="center" id="13" ></td>
+                        <td style="display: none"  align="center" id="23" ></td>
+                        <td style="display: none"  align="center" id="33" ></td>
+                        <td style="display: none"  align="center" id="43" ></td>
+                        <td style="display: none"  align="center" id="53" ></td>
+                    </tr>
+                    <tr style="background-color: lightgray">
+                        <td align="center">四<br/>（16:20）</td>
+                        <td style="display: none"  align="center" id="14" ></td>
+                        <td style="display: none"  align="center" id="24" ></td>
+                        <td style="display: none"  align="center" id="34" ></td>
+                        <td style="display: none"  align="center" id="44" ></td>
+                        <td style="display: none"  align="center" id="54" ></td>
+                    </tr>
+                    <tr>
+                        <td align="center">五<br/>（19:30）</td>
+                        <td style="display: none"  align="center" id="15" ></td>
+                        <td style="display: none"  align="center" id="25" ></td>
+                        <td style="display: none"  align="center" id="35" ></td>
+                        <td style="display: none"  align="center" id="45" ></td>
+                        <td style="display: none"  align="center" id="55" ></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+
+        <script src="js/vendor/modernizr-{{MODERNIZR_VERSION}}.min.js"></script>
+        <script src="https://code.jquery.com/jquery-{{JQUERY_VERSION}}.min.js" integrity="{{JQUERY_SRI_HASH}}" crossorigin="anonymous"></script>
+        <script>window.jQuery || document.write('<script src="js/vendor/jquery-{{JQUERY_VERSION}}.min.js"><\/script>')</script>
+        <script src="js/plugins.js"></script>
+        <script src="js/main.js"></script>
+
+        <!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. -->
+        <script>
+            window.ga=function(){ga.q.push(arguments)};ga.q=[];ga.l=+new Date;
+            ga('create','UA-XXXXX-Y','auto');ga('send','pageview')
+        </script>
+        <script src="https://www.google-analytics.com/analytics.js" async defer></script>
+
+
+    </body>
+</html>
